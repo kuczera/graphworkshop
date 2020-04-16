@@ -298,20 +298,20 @@ AS line FIELDTERMINATOR ','
 WITH line
 WHERE line.nachname IS NOT NULL
 CREATE (p1:Person {pid:line.nummer, nachname:line.nachname,
-vorname:line.vorname, geburtsort:line.geburtsort, geburtsjahr:line.geburtsjahr, linkerNachbar:line.linkerNachbar, kennt:line.kennt, fach1:line.fach1, fach2:line.fach2})
+vorname:line.vorname, geburtsort:line.geburtsort, geburtsjahr:line.geburtsjahr, kennt:line.kennt, fach1:line.fach1, fach2:line.fach2, projekt:line.projekt})
 RETURN *;</code></pre></li>
 
 
-                	<li class="substep"><pre><code class="linenumbers js">LOAD CSV WITH HEADERS FROM
-"https://docs.google.com/spreadsheets/d/1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw/export?format=csv&id=1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw&gid=0"
-AS line FIELDTERMINATOR ',' WITH line WHERE line.linkerNachbar IS NOT NULL
-MATCH (p1:Person {pid:line.nummer})
-MATCH (p2:Person {pid:line.linkerNachbar})
-CREATE (p1)-[:MEIN_LINKER_NACHBAR]->(p2)
-WITH line, p1, split(line.kennt,",") AS kennen
-MATCH (p3:Person) WHERE p3.pid in kennen
-MERGE (p1)-[:KENNT]->(p3)
-RETURN *;</code></pre></li>
+                	<li class="substep"><pre><code class="linenumbers js">MATCH (n:Person)
+MATCH (n2:Person {id:n.kennt})
+MERGE (n)-[:KENNT]->(n2);
+MATCH (n:Person)
+MERGE (p:Projekt {name:n.projekt})
+MERGE (n)-[:PROJEKT]->(p)
+MERGE (f1:Fach {name:n.fach1})
+MERGE (n)-[:FACH]->(f1)
+MERGE (f2:Fach {name:n.fach2})
+MERGE (n)-[:FACH]->(f2);</code></pre></li>
         	</ul>
         </div>
 
