@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DTA</title>
+
+    <!-- meta information -->
+    <meta name="author" content="AUTHOR" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <!-- favicons -->
+    <link rel="shortcut icon" href="resources/img/favicon.png" />
+    <link rel="apple-touch-icon" href="resources/img/apple-touch-icon.png" />
+
+    <!-- CSS reset and grid -->
+    <link href="vendor/normalize/normalize-4.1.1.css" rel="stylesheet" />
+    <link href="vendor/skeleton/skeleton-2.0.4.css" rel="stylesheet" />
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,600italic,400italic,700italic,800,800italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+
+    <!-- presentation styles -->
+    <link href="resources/css/style.css" rel="stylesheet" />
+
+    <!-- other libraries -->
+
+    <!-- chartist.js -->
+    <link rel="stylesheet" href="vendor/chartist/chartist.min-0.9.7.css" />
+
+    <!-- codemirror -->
+    <link rel="stylesheet" href="vendor/codemirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="resources/css/codemirror-sparql.css" />
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css" />
+
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="vendor/magnific-popup/magnific-popup-1.1.0.css" />
+
+    <!-- js libs that need to be in head -->
+
+    <!-- greuler -->
+    <script src="vendor/d3/d3-3.5.6.js"></script>
+    <script src="vendor/cola/cola.v3.min.js"></script>
+    <script src="vendor/greuler/greuler-0.5.5.min.js"></script>
+
+    <!-- html5 dataset shim for IE -->
+    <script src="vendor/impress/html5-dataset.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <div class="fallback-message">
+        <p>
+            Your browser <strong>doesn't support the features required</strong> by impress.mod.js,
+            so you are presented with a simplified version of this presentation.
+        </p>
+        <p>
+            For the best experience please use the latest <strong>Chrome</strong>, <strong>Safari</strong>
+            or <strong>Firefox</strong> browser.
+        </p>
+    </div>
+
+    <div id="impress">
+
+        <div class="step">
+            <h4>Akademie der Wissenschaften und der Literatur | Digitale Akademie</h4>
+
+            <h2>DTA-Texte in der Graphenwelt</h2>
+
+            <h2 class="red"></h2>
+
+            <h5 class="byline">
+                <strong>Andreas Kuczera |
+                    <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/">https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/</a>
+                    <br/>
+                    Beispielprojekte: <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/NomenEtGens.html">NeG</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/RI.html">RI</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/DTA.html">DTA</a>
+                </strong>
+                <br/><a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>
+            </h5>
+        </div>
+
+        <div class="step">
+            <h2>Gliederung</h2>
+            <ol class=subset>
+                <li>
+                    Das DTA
+                </li>
+                <li>
+                    Import von TCF-XML-Texten des DTA
+                </li>
+                <li>
+                    Import von TEI-P5-Daten des DTA
+                </li>
+                <li>
+                    Graph-Refactoring
+                </li>
+                <li>
+                    Modellierungsansätze
+                </li>
+            </ol>
+        </div>
+
+
+        <div class="step">
+            <h1 class="red">01a</h1>
+            <h2>Das DTA</h2>
+
+                <ul class="medium">
+                	<li class="substep">Das <a href="http://www.deutschestextarchiv.de">Deutsche Textarchiv</a> (DTA) stellt einen Disziplinen übergreifenden Grundbestand deutscher Werke aus dem Zeitraum von ca. 1600 bis 1900 im Volltext und als digitale Faksimiles frei zur Verfügung.</li>
+                	<li class="substep">Das Material ist so aufbereitet, dass es über das Internet in vielfältiger Weise nutzbar ist.</li>
+					<li class="substep">Downloadformate sind beispielsweise:</li>
+                	<li class="substep"><a href="http://www.deutschestextarchiv.de/book/download_xml/patzig_msgermfol841842_1828">TEI-P5</a></li>
+                	<li class="substep"><a href="http://www.deutschestextarchiv.de/book/download_fulltcf/30962">TCF</a></li>
+                	<li class="substep"><a href="http://www.deutschestextarchiv.de/book/download_txt/patzig_msgermfol841842_1828">Plain-Text</a></li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h1 class="red">01b</h1>
+            <h2>Die Datenbank neo4j</h2>
+            <ul class="medium">
+            	<li class="substep">
+			<b>Gemeinsame Arbeitsdatenbank</b>: <a href="https://neo4j.adwmainz.net/browser/">https://neo4j.adwmainz.net/browser/</a>
+            <pre><code class="linenumbers js">Host: bolt://neo4j.adwmainz.net</code></pre>
+            <pre><code class="linenumbers js">Login: digme</code></pre>
+            <pre><code class="linenumbers js">Passwort: |Rpmx18YvM6Zn-</code></pre>
+            	</li>
+<li class="substep">Datenbank leeren:
+<pre><code class="linenumbers js">MATCH (n) DETACH DELETE n;
+</code></pre></li>
+            </ul>
+        </div>
+
+
+        <div class="step">
+            <h1 class="red">02a</h1>
+            <h2>Import von TCF</h2>
+            	<ul class="medium">
+                	<li class="substep">Für den Import von TCF werden zunächst Trigger erstellt, mit denen sichergestellt wird, dass jedes Token eine eindeutige ID erhält
+<pre><code class="linenumbers js">create constraint on (t:Token) assert t.id is unique;
+create constraint on (s:Sentence) assert s.id is unique;
+create constraint on (l:Lemma) assert l.text is unique;
+</code></pre></li>
+                	<li class="substep">Mit dem folgenden Befehl werden die einzelnen Token als Textkette in den Graph importiert
+<pre><code class="linenumbers js">call
+apoc.load.xmlSimple('http://deutschestextarchiv.de/book/download_fulltcf/16181')
+yield value as doc
+unwind doc._TextCorpus._tokens._token as token
+create (t:Token{id:token.ID, text:token._text})
+with collect(t) as tokens
+unwind apoc.coll.pairs(tokens)[0..-1] as value
+with value[0] as a, value[1] as b
+create (a)-[:NEXT_TOKEN]->(b);
+</code></pre></li>
+            	</ul>
+        </div>
+
+        <div class="step">
+            <h1 class="red">02b</h1>
+            <h2>Import von TCF</h2>
+            	<ul class="medium">
+                	<li class="substep">Im nächsten Schritt werden die sentence-Einteilungen importiert
+<pre><code class="linenumbers js">call
+apoc.load.xmlSimple('http://deutschestextarchiv.de/book/download_fulltcf/16181')
+yield value as doc
+unwind doc._TextCorpus._sentences._sentence as sentence
+match (t1:Token{id:head(split(sentence.tokenIDs, ' '))})
+match (t2:Token{id:last(split(sentence.tokenIDs, ' '))})
+create (s:Sentence{id:sentence.ID})
+create (s)-[:SENTENCE_STARTS]->(t1)
+create (s)-[:SENTENCE_ENDS]->(t2)
+with collect(s) as sentences
+unwind apoc.coll.pairs(sentences)[0..-1] as value
+with value[0] as a, value[1] as b
+create (a)-[:NEXT_SENTENCE]->(b);
+</code></pre></li>
+             	</ul>
+        </div>
+
+        <div class="step">
+            <h1 class="red">02c</h1>
+            <h2>Import von TCF</h2>
+            	<ul class="medium">
+                	<li class="substep">Import der Lemmata und Verknüpfung mit den Token
+<pre><code class="linenumbers js">call
+apoc.load.xmlSimple('http://deutschestextarchiv.de/book/download_fulltcf/16181')
+yield value as doc
+unwind doc._TextCorpus._lemmas._lemma as lemma
+match (t:Token{id:lemma.tokenIDs})
+merge (l:Lemma{text:lemma._text})
+create (t)-[:LEMMATISIERT]->(l);
+</code></pre></li>
+                	<li class="substep">Für bessere Auswertungsmöglichkeiten werden die Lemma-Informationen auch noch als Property der Token-Knoten gespeichert
+<pre><code class="linenumbers js">call
+apoc.load.xmlSimple('http://deutschestextarchiv.de/book/download_fulltcf/16181')
+yield value as doc
+unwind doc._TextCorpus._lemmas._lemma as lemma
+match (t:Token{id:lemma.tokenIDs}) set t.Lemma = lemma._text;
+</code></pre></li>
+             	</ul>
+        </div>
+
+        <div class="step">
+            <h1 class="red">02d</h1>
+            <h2>Import von TCF</h2>
+            	<ul class="medium">
+                	<li class="substep">Beispielabfrage: Zeige mir alle Stellen mit dem Lemma <i>Gestalt</i>
+<pre><code class="linenumbers js">match
+w=()-[:NEXT_TOKEN*5]->(a:Token{Lemma:'Gestalt'})-[:NEXT_TOKEN*5]->()
+return *;
+</code></pre></li>
+                	<li class="substep">Vergleich von <a href="bilder/Same_AS_Humbold.png">Textketten</a></li>
+            	</ul>
+        </div>
+
+        <div class="step">
+            <h1 class="red">03</h1>
+            <h2>Import von TEI-P5-Strukturen in den Graphen</h2>
+            	<ul class="medium">
+                	<li class="substep">Beispielhaft wird eine <a href="http://www.deutschestextarchiv.de/book/download_xml/patzig_msgermfol841842_1828">Mitschrift</a> der <a href="http://www.deutschestextarchiv.de/search/metadata?corpus=avhkv">Kosmos-Vorlesung</a> von Alexander von Humboldt importiert.</li>
+                	<li class="substep">Hier der <a href="http://www.deutschestextarchiv.de/patzig_msgermfol841842_1828/11">Link</a> zu einer Beispielseite.</li>
+                	<li class="substep"><pre>
+<code class="linenumbers js">call apoc.xml.import('https://seafile.rlp.net/f/6282a26504cc4f079ab9/?dl=1',
+{connectCharacters: true, charactersForTag:{lb:' '}, filterLeadingWhitespace: true}) yield node
+return node;
+</code></pre></li>
+            	</ul>
+        </div>
+
+        <div class="step">
+            <h1 class="red">04a</h1>
+            <h2>Graph-Refactoring</h2>
+            	<ul class="medium">
+                	<li class="substep">Ein <a href="bilder/Graphbeispiel-rotiren.png">Beispiel</a> mit subst-add-del-Elementen
+<pre><code class="linenumbers js">MATCH
+(n0:XmlCharacters)-[r0:NE]->
+(n1:XmlCharacters{text:'rotiren'})-[r1:NE]->
+(n2:XmlCharacters{text:'bewegen'})-[r2:NE]->
+(n3:XmlCharacters)-[r3:NE]->
+(n4:XmlCharacters{text:'ſich'})-[r4:NE]->
+(n5:XmlCharacters)
+RETURN *;
+</code></pre></li>
+            	</ul>
+        </div>
+
+        <div class="step">
+            <h1 class="red">04b</h1>
+            <h2>Graph-Refactoring</h2>
+            	<ul class="medium">
+                	<li class="substep">Umbau des Graphen (Graph-Refactoring)
+<pre><code class="linenumbers js">MATCH
+(n0:XmlCharacters)-[r0:NE]->
+(n1:XmlCharacters{text:'rotiren'})-[r1:NE]->
+(n2:XmlCharacters{text:'bewegen'})-[r2:NE]->
+(n3:XmlCharacters)-[r3:NE]->
+(n4:XmlCharacters{text:'ſich'})-[r4:NE]->
+(n5:XmlCharacters)
+DELETE r0, r1
+CREATE (n0)-[:NE]->(n2)
+CREATE (n0)-[:VARIANT{variant_type:'del'}]->(n1)
+CREATE (n1)-[:VARIANT{variant_type:'del'}]->(n5);
+</code></pre></li>
+            	</ul>
+        </div>
+
+        <div class="step">
+            <h1 class="red">04c</h1>
+            <h2>Graph-Refactoring</h2>
+            	<ul class="medium">
+                	<li class="substep"><a href="bilder/Graphbeispiel-rotiren-refac.png">Ergebnis</a> ansehen
+<pre><code class="linenumbers js">MATCH
+(n0:XmlCharacters)-[r0:NE]->
+(n2:XmlCharacters{text:'bewegen'})-[r2:NE]->
+(n3:XmlCharacters)-[r3:NE]->
+(n4:XmlCharacters{text:'ſich'})-[r4:NE]->
+(n5:XmlCharacters),
+(n1:XmlCharacters{text:'rotiren'})-[r1:VARIANT]->(n5)
+RETURN *;
+</code></pre></li>
+            	</ul>
+        </div>
+
+    <div class="step">
+            <h1 class="red">05</h1>
+            <h2>Modellierungsansätze</h2>
+			<h5>Einfaches <a href="http://www.deutschestextarchiv.de/book/view/patzig_msgermfol841842_1828/?hl=welcher;p=6">Bild</a> - komplexe Modellierung (Quelle: <a href=http://www.deutschestextarchiv.de/book/show/patzig_msgermfol841842_1828>Patzig (DTA)</a></a></h5>
+        <div class="row">
+            <div class="six columns">
+                        <figure class="mfp-lightbox"><a href="bilder/DTA-Textmodell im Graphen.png"><img
+                                src="bilder/DTA-Textmodell im Graphen.png"
+                                alt="DTA-Textmodell im Graphen.png"></a>
+                            <figcaption class="small">DTA-Textmodell im Graphen.png</figcaption>
+                        </figure>
+            </div>
+            <div class="six columns">
+                        <figure class="mfp-lightbox"><a href="bilder/DTA würde.png"><img
+                                src="bilder/DTA würde.png"
+                                alt="DTA-würde.png"></a>
+                            <figcaption class="small">Beispielstelle mit "würde" in XML</figcaption>
+                        </figure>
+
+            </div>
+        </div>
+    </div>
+
+
+        <div class="step">
+            <h4>Akademie der Wissenschaften und der Literatur | Digitale Akademie</h4>
+
+            <h2 class="red">Vielen Dank für Ihre Aufmerksamkeit</h2>
+
+            Den Link zur Präsentation finden Sie auf der Seite <a href="http://www.graphentechnologien.de">www.graphentechnologien.de</a><br/>
+
+			<a href="https://digitale-methodik.adwmainz.net/mod5/5c/pages/topics/graphentechnologien#literatur">Literaturauswahl</a>
+
+            <h5 class="byline">
+                <strong>Andreas Kuczera |
+                    <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/">https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/</a>
+                    <br/>
+                    Beispielprojekte: <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/NomenEtGens.html">NeG</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/RI.html">RI</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/DTA.html">DTA</a>
+                </strong>
+                <br/><a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>
+            </h5>
+        </div>
+
+    <!-- js libs -->
+
+    <!-- chartist -->
+    <script src="vendor/chartist/chartist.min-0.9.7.js"></script>
+
+    <!-- codemirror -->
+    <script src="vendor/codemirror/lib/codemirror.js"></script>
+    <script src="vendor/codemirror/mode/sparql/sparql.js"></script>
+
+    <!-- highlight -->
+    <script src="vendor/highlight/highlight.pack-9.3.0.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- jquery -->
+    <script src="vendor/jquery/jquery-1.11.0.min.js"></script>
+
+    <!-- magnific popup -->
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min-1.1.0.js"></script>
+    <script src="resources/js/magnific-popup.lightbox.js"></script>
+
+    <!-- sgvizler -->
+    <script src="vendor/sgvizler/sgvizler.fork.js"></script>
+
+    <!-- impress.mod.js -->
+    <script src="vendor/impress/impress.fork.js"></script>
+    <script src="vendor/impress/impress-slidenum.js"></script>
+    <script>
+        var obj = impress();
+        obj.init();
+        initSlideNo(obj);
+    </script>
+
+</body>
+</html>

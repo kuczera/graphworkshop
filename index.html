@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Graphentechnologien</title>
+
+    <!-- meta information -->
+    <meta name="author" content="AUTHOR" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <!-- favicons -->
+    <link rel="shortcut icon" href="resources/img/favicon.png" />
+    <link rel="apple-touch-icon" href="resources/img/apple-touch-icon.png" />
+
+    <!-- CSS reset and grid -->
+    <link href="vendor/normalize/normalize-4.1.1.css" rel="stylesheet" />
+    <link href="vendor/skeleton/skeleton-2.0.4.css" rel="stylesheet" />
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,600italic,400italic,700italic,800,800italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+
+    <!-- presentation styles -->
+    <link href="resources/css/style.css" rel="stylesheet" />
+
+    <!-- other libraries -->
+
+    <!-- chartist.js -->
+    <link rel="stylesheet" href="vendor/chartist/chartist.min-0.9.7.css" />
+
+    <!-- codemirror -->
+    <link rel="stylesheet" href="vendor/codemirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="resources/css/codemirror-sparql.css" />
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css" />
+
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="vendor/magnific-popup/magnific-popup-1.1.0.css" />
+
+    <!-- js libs that need to be in head -->
+
+    <!-- greuler -->
+    <script src="vendor/d3/d3-3.5.6.js"></script>
+    <script src="vendor/cola/cola.v3.min.js"></script>
+    <script src="vendor/greuler/greuler-0.5.5.min.js"></script>
+
+    <!-- html5 dataset shim for IE -->
+    <script src="vendor/impress/html5-dataset.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <div class="fallback-message">
+        <p>
+            Your browser <strong>doesn't support the features required</strong> by impress.mod.js,
+            so you are presented with a simplified version of this presentation.
+        </p>
+        <p>
+            For the best experience please use the latest <strong>Chrome</strong>, <strong>Safari</strong>
+            or <strong>Firefox</strong> browser.
+        </p>
+    </div>
+
+    <div id="impress">
+
+        <div class="step">
+            <h4>Akademie der Wissenschaften und der Literatur | Digitale Akademie</h4>
+
+            <h1><a href="http://www.graphentechnologien.de">Graphentechnologien</a> in den Digitalen Geisteswissenschaften</h1>
+
+            <h2 class="red">Erste Schritte in der Graphenwelt</h2>
+
+            <h5 class="byline">
+                <strong>Andreas Kuczera |
+                    <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/">https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/</a>
+                    <br/>
+                    Beispielprojekte: <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/NomenEtGens.html">NeG</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/RI.html">RI</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/DTA.html">DTA</a>
+                </strong>
+                <br/><a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>
+            </h5>
+        </div>
+
+        <div class="step">
+            <h2>Gliederung</h2>
+            <ol class=subset>
+                <li>
+                    Beispielgraph
+                </li>
+                <li>
+                    Neo4j
+                </li>
+                <li>
+                    Mein erster Knoten
+                </li>
+                <li>
+                    Verknüpfungen und Auswertung
+                </li>
+                <li>
+                    Import von Daten aus Google-Drive
+                </li>
+            </ol>
+        </div>
+
+	    <div class="step">
+    	    <div class="row">
+        	    <div class="twelve columns">
+                        <figure class="mfp-lightbox"><a href="bilder/Beispielgraph.png"><img
+                                src="bilder/Beispielgraph.png"
+                                alt="Karl der Große, Einhard und ein Buch"></a>
+                            <figcaption class="small">Beispielgraph: Karl der Große, Einhard und ein Buch</figcaption>
+                        </figure>
+	            </div>
+    	    </div>
+    	</div>
+
+        <div class="step">
+            <h1 class="red">01b</h1>
+            <h2>Erläuterungen</h2>
+            	<ul class="medium">
+                	<li class="substep">
+            			Der <a href="bilder/Beispielgraph.png">Beispielgraph</a> zeigt oben einen <b>Knoten (engl. Nodes)</b>
+            			vom Typ Person mit der Eigenschaft Name.
+            			Diese hat den Wert "Karl der Große".</li>
+                	<li class="substep">
+                		Links unten ist ein weiter <b>Knoten</b> vom Typ
+                		Person mit dem Namen "Einhard".</li>
+                	<li class="substep">
+                		Rechts unten ist ein <b>Knoten</b> vom Typ Buch und dem Titel "Vita Karoli Magni".
+                	</li>
+                	<li class="substep">
+                		Die <b>Kanten</b> (engl. Edges) geben an, dass Karl der Große Einhard kannte, Einhard ca. 828-830
+            			das Buch "Vita Karoli Magni" schrieb und Karl der Große in dem Buch
+            			vorkommt.
+                	</li>
+            	</ul>
+
+        </div>
+
+	    <div class="step">
+    	    <div class="row">
+        	    <div class="twelve columns">
+                        <figure class="mfp-lightbox"><a href="bilder/zettelkasten.jpg"><img
+                                src="bilder/zettelkasten.jpg"
+                                alt="Graphen sind mit Karteikarten vergleichbar"></a>
+                            <figcaption class="small">Graphen sind mit <a href="resources/img/zettelkasten.jpg">Karteikarten</a> vergleichbar (<a href="https://www.faz.net/aktuell/feuilleton/geisteswissenschaften/zettelkaesten-alles-und-noch-viel-mehr-die-gelehrte-registratur-12103104.html">Quelle: FAZ</a>)</figcaption>
+                        </figure>
+	            </div>
+    	    </div>
+    	</div>
+
+
+        <div class="step">
+            <h1 class="red">02</h1>
+            <h2>Neo4j</h2>
+
+            	<ul class="medium">
+                	<li class="substep">
+            			Download von Neo4j-Desktop von <a href="https://neo4j.com/download/">https://neo4j.com/download/</a>
+            		</li>
+                	<li class="substep">
+            			Oder eine <a href="https://neo4j.com/sandbox-v2/">Sandbox</a> erstellen<br/>
+            			</li>
+                	<li class="substep">
+            			Neo4j-Desktop starten bzw. Browser aufrufen<br/>
+            			(<a href="http://localhost:7474">http://localhost:7474</a>)
+            		</li>
+                	<li class="substep">
+                		Links oben sind Informationen zu Struktur der Datenbank und Beispielbefehle. Im dritten Tab findet sich die Dokumentation
+                	</li>
+                	<li class="substep">
+                		Im rechten Bereich befindet sich das Eingabefeld für die Befehle
+                		und das Ergebnisfenster
+                	</li>
+                 	<li class="substep">
+                		Erstes Login mit neo4j/neo4j. Anschließend eigenes Passwort vergeben. Merken !
+                	</li>
+           	</ul>
+
+        </div>
+
+
+
+        <div class="step">
+            <h1 class="red">03a</h1>
+            <h2>Mein erster Knoten</h2>
+            <ul class="medium">
+            	<li class="substep">
+			<a href="http://jlu-buster.mni.thm.de:11000/browser/"><b>Link zur gemeinsamen Arbeitsdatenbank</b></a>
+            <pre><code class="linenumbers js">Login: neo4j</code></pre>
+            <pre><code class="linenumbers js">Passwort: |Rpmx18YvM6Zn-</code></pre>
+            	</li>
+<li class="substep">Datenbank leeren:
+<pre><code class="linenumbers js">MATCH (n) DETACH DELETE n;
+</code></pre></li>
+            </ul>
+        </div>
+
+
+        <div class="step">
+            <h1 class="red">03b</h1>
+            <h2>Mein erster Knoten</h2>
+            <ul class="medium">
+
+<li class="substep">Erstellt einen Knoten - Man muss bei Erstellung einen Namen angeben, damit anschließend etwas zurückgeliefert werden kann:
+<pre><code class="linenumbers js">CREATE (n) RETURN *;
+</code></pre></li>
+
+<li class="substep">Erstellt einen Knoten vom <b>Typ Person</b> mit einem Label und liefert das erstellte als Ergebnis zurück:
+<pre><code class="linenumbers js">CREATE (n:Person) RETURN n;
+</code></pre></li>
+
+            </ul>
+        </div>
+
+
+        <div class="step">
+            <h1 class="red">03c</h1>
+            <h2>Mein erster Knoten</h2>
+            <ul class="medium">
+<li class="substep">Erstellt einen Knoten mit Label und einer Eigenschaft (auch mehrfach):
+<pre><code class="linenumbers js">CREATE (n:Person {nachname:'Kuczera'})
+RETURN n;
+</code></pre></li>
+
+            <ul class="medium">
+<li class="substep">Löschen eines Knotens:
+<pre><code class="linenumbers js">MATCH (n:Person {nachname:'Kuczera'})
+DELETE n;
+</code></pre></li>
+
+<li class="substep">Knoten mit Label und einer Eigenschaft erstellen, falls es ihn noch nicht gibt:
+<pre><code class="linenumbers js">MERGE (n:Person {nachname:'Kuczera'})
+RETURN n;
+</code></pre></li>
+
+            </ul>
+        </div>
+
+
+        <div class="step">
+            <h1 class="red">03d</h1>
+            <h2>Mein erster Knoten</h2>
+            <ul class="medium">
+
+<li class="substep">Ergänzt einen Personenknoten um die Eigenschaft Geburtsort:
+<pre><code class="linenumbers js">MATCH (n:Person {nachname:'Kuczera'})
+SET n.geburtsort = 'Giessen'
+RETURN n;
+</code></pre></li>
+
+<li class="substep">Zeige mir alle Personen, mit einem bestimmen Nachnamen:
+<pre><code class="linenumbers js">MATCH (n:Person)
+WHERE n.nachname = 'Kuczera'
+RETURN n;
+</code></pre></li>
+
+<li class="substep">Zeige mir alle Personen, in denen der Buchstabe 'r' in der Eigenschaft Nachname vorkommt:
+<pre><code class="linenumbers js">MATCH (n:Person)
+WHERE n.nachname =~ '.*r.*'
+RETURN n;
+</code></pre></li>
+
+            </ul>
+        </div>
+
+        <div class="step">
+            <h1 class="red">04</h1>
+            <h2>Verknüpfungen und Auswertung</h2>
+            <ul class="medium">
+
+            	<li class="substep">Ergänzt eine weitere Person:
+<pre><code class="linenumbers js">MERGE (n:Person {nachname:'Schrade', geburtsort:'Worms'}) RETURN *;
+</code></pre></li>
+
+            	<li class="substep">Ergänzt eine Verküpfung zwischen zwei Personen
+<pre><code class="linenumbers js">MATCH (n1:Person {nachname:'Kuczera'})
+MATCH (n2:Person {nachname:'Schrade'})
+MERGE (n1)-[:MEIN_LINKER_NACHBAR]->(n2)
+RETURN *;
+</code></pre></li>
+
+				<li class="substep">Zeige mir alle Personen neben Herrn Kuczera:
+<pre><code class="linenumbers js">MATCH (n:Person {nachname:'Kuczera'})-[:MEIN_LINKER_NACHBAR]-(m:Person)
+RETURN *;
+</code></pre></li>
+			</ul>
+        </div>
+
+        <div class="step">
+            <h1 class="red">05</h1>
+            <h2>LOAD CSV aus dem Google Drive</h2>
+            <ul class="medium">
+                  <li class="substep"><a href="https://docs.google.com/spreadsheets/d/1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw/edit?usp=sharing">Google-Tabelle</a> und <a href="https://docs.google.com/document/d/1Rv7VAj7XSAKxgZTLHIIUPFzB0lP5xHMosIBwFWjROuU/edit?usp=sharing">Begleitdokument</a>
+                	<li class="substep"><pre><code class="linenumbers js">LOAD CSV WITH HEADERS FROM
+"https://docs.google.com/spreadsheets/d/1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw/export?format=csv&id=1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw&gid=0"
+AS line FIELDTERMINATOR ','
+WITH line
+WHERE line.nachname IS NOT NULL
+CREATE (p1:Person {pid:line.nummer, nachname:line.nachname,
+vorname:line.vorname, geburtsort:line.geburtsort, geburtsjahr:line.geburtsjahr, linkerNachbar:line.linkerNachbar, kennt:line.kennt, fach1:line.fach1, fach2:line.fach2})
+RETURN *;</code></pre></li>
+
+
+                	<li class="substep"><pre><code class="linenumbers js">LOAD CSV WITH HEADERS FROM
+"https://docs.google.com/spreadsheets/d/1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw/export?format=csv&id=1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw&gid=0"
+AS line FIELDTERMINATOR ',' WITH line WHERE line.linkerNachbar IS NOT NULL
+MATCH (p1:Person {pid:line.nummer})
+MATCH (p2:Person {pid:line.linkerNachbar})
+CREATE (p1)-[:MEIN_LINKER_NACHBAR]->(p2)
+WITH line, p1, split(line.kennt,",") AS kennen
+MATCH (p3:Person) WHERE p3.pid in kennen
+MERGE (p1)-[:KENNT]->(p3)
+RETURN *;</code></pre></li>
+        	</ul>
+        </div>
+
+
+        <div class="step">
+            <h1 class="red">06</h1>
+            <h2>Abfragen und Übungen</h2>
+            <ul class="medium">
+
+				<li class="substep">In welchem Ort sind die meisten Personen geboren ?
+<pre><code class="linenumbers js">MATCH (n:Person)
+RETURN n.geburtsort, count(*) as count, collect(n.nachname) as nachname
+ORDER BY count DESC;
+</code></pre></li>
+
+            	<li class="substep">In welchem Jahr wurden die meisten Seminarteilnehmer geboren ?
+<pre><code class="linenumbers js">MATCH (n:Person)
+RETURN n.geburtsjahr, count(*) as count, collect(n.nachname) as nachname
+ORDER BY count DESC;
+</code></pre></li>
+
+
+			</ul>
+        </div>
+
+
+        <div class="step">
+            <h1 class="red">06</h1>
+            <h2>Abfragen und Übungen</h2>
+            <ul class="medium">
+
+				<li class="substep">Gibt es eine Verbindung zwischen zwei Personen ?
+<pre><code class="linenumbers js">// shortest_path
+MATCH
+(p1:Person { nachname:'Kuczera' }),
+(p2:Person { nachname:'Schrade' }),
+p = shortestPath((p1)-[*..25]-(p2))
+RETURN p;
+</code></pre></li>
+
+            	<li class="substep">Pfade zwischen Personen, die 1993 und 1995 geboren wurden ?
+<pre><code class="linenumbers js">MATCH
+(p1:Person),
+(p2:Person),
+p = shortestPath((p1)-[*..25]-(p2))
+WHERE p1.geburtsjahr = '1992'
+AND p2.geburtsjahr = '1995'
+AND p1 <> p2
+RETURN p;
+</code></pre></li>
+
+
+			</ul>
+    </div>
+    <div class="step">
+          <h1 class="red">07</h1>
+          <h2>Graph-Refactoring</h2>
+          <ul class="medium">
+
+      <li class="substep">Geburtsorte explizit erstellen
+<pre><code class="linenumbers js">// Geburtsorte aus der Property Geburtsort erstellen
+  MATCH (n:Person)
+  WHERE n.geburtsort IS NOT NULL
+  MERGE (o:Ort {name:n.geburtsort})
+  MERGE (o)<-[:GEBOREN_IN]-(n)
+  RETURN *;
+</code></pre></li>
+
+            <li class="substep">Fächer explizit erstellen
+<pre><code class="linenumbers js">// Fächer aus den Properties fach1 und fach2 erstellen
+  MATCH (n:Person) WHERE n.fach1 IS NOT NULL
+  MERGE (f1:Fach {name:n.fach1})
+  MERGE (f1)<-[:STUDIUM]-(n)
+  RETURN *;
+
+  MATCH (n:Person) WHERE n.fach2 IS NOT NULL
+  MERGE (f2:Fach {name:n.fach2})
+  MERGE (f2)<-[:STUDIUM]-(n)
+  RETURN *;
+</code></pre></li>
+
+
+    </ul>
+        </div>
+
+        <div class="step">
+              <h1 class="red">08</h1>
+              <h2>Graph-Auswertung</h2>
+              <ul class="medium">
+
+          <li class="substep">Welche Fächer sind am beliebtesten ?
+    <pre><code class="linenumbers js">// Beliebtestes Fach
+      MATCH (p:Person)-[:STUDIUM]-(f:Fach)
+      RETURN f.name AS Fach, count(*) AS Anzahl
+      ORDER BY Anzahl DESC;
+    </code></pre></li>
+
+                <li class="substep">Gibt es einen Zusammenhang zwischen Geburtsort und Fachwahl ?
+    <pre><code class="linenumbers js">// Geburtsort und Fächer ausgezählt
+      MATCH (o:Ort)<-[:GEBOREN_IN]-(p:Person)-[:STUDIUM]-(f:Fach)
+      RETURN o.name AS Ort, f.name AS Fach, count(*) AS Anzahl
+      ORDER BY Anzahl DESC;
+    </code></pre></li>
+
+
+        </ul>
+            </div>
+
+        <div class="step">
+            <h4>Akademie der Wissenschaften und der Literatur | Digitale Akademie</h4>
+
+            <h2 class="red">Vielen Dank für Ihre Aufmerksamkeit</h2>
+
+            Den Link zur Präsentation finden Sie auf der Seite <a href="http://www.graphentechnologien.de">www.graphentechnologien.de</a><br/>
+
+			<a href="https://digitale-methodik.adwmainz.net/mod5/5c/pages/topics/graphentechnologien#literatur">Literaturauswahl</a>
+
+            <h5 class="byline">
+                <strong>Andreas Kuczera |
+                    <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/">https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/</a>
+                    <br/>
+                    Beispielprojekte: <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/NomenEtGens.html">NeG</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/RI.html">RI</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/DTA.html">DTA</a>
+                </strong>
+                <br/><a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>
+            </h5>
+        </div>
+
+
+    </div>
+
+    <!-- js libs -->
+
+    <!-- chartist -->
+    <script src="vendor/chartist/chartist.min-0.9.7.js"></script>
+
+    <!-- codemirror -->
+    <script src="vendor/codemirror/lib/codemirror.js"></script>
+    <script src="vendor/codemirror/mode/sparql/sparql.js"></script>
+
+    <!-- highlight -->
+    <script src="vendor/highlight/highlight.pack-9.3.0.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- jquery -->
+    <script src="vendor/jquery/jquery-1.11.0.min.js"></script>
+
+    <!-- magnific popup -->
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min-1.1.0.js"></script>
+    <script src="resources/js/magnific-popup.lightbox.js"></script>
+
+    <!-- sgvizler -->
+    <script src="vendor/sgvizler/sgvizler.fork.js"></script>
+
+    <!-- impress.mod.js -->
+    <script src="vendor/impress/impress.fork.js"></script>
+    <script src="vendor/impress/impress-slidenum.js"></script>
+    <script>
+        var obj = impress();
+        obj.init();
+        initSlideNo(obj);
+    </script>
+
+</body>
+</html>

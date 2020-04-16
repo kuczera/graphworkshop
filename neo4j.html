@@ -1,0 +1,64 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>README.md</title><style></style></head><body id="preview">
+<h3><a id="13102016__ISS___Akademie_Mainz_0"></a>13.10.2016 | ISS  | Akademie Mainz</h3>
+<h1><a id="Erste_Schritte_in_der_Graphdatenbank_2"></a>Erste Schritte in der Graphdatenbank</h1>
+<h2><a id="Andreas_Kuczera_4"></a>Andreas Kuczera</h2>
+<h1><a id="Ein_Beispielgraph_6"></a>Ein Beispielgraph</h1>
+<p><img src="https://slides-iss.adwmainz.net/graphdaten/neo4j/bilder/Beispielgraph.png" alt="Beispielgraph"></p>
+<h2><a id="Erluterungen_10"></a>Erläuterungen</h2>
+<ol>
+<li>Der Beispielgraph zeigt oben einen <strong>Knoten</strong> (engl.Nodes)
+vom Typ Person mit der Eigenschaft Name.
+Diese hat den Wert “Karl der Große”.</li>
+<li>Links unten ist ein weiter <strong>Knoten</strong> vom Typ Person mit dem Namen “Einhard”</li>
+<li>Rechts unten ist ein <strong>Knoten</strong> vom Typ Buch und dem Titel “Vita Karoli Magni”.</li>
+<li>Die <strong>Kanten</strong> (engl. Edges) geben an, dass Karl der Große Einhart kannte, Einhard ca. 828-830 das Buch “Vita Karoli Magni” schrieb und Karl der Große in dem Buch vorkommt.</li>
+</ol>
+<h1><a id="Die_Arbeitsdatenbank_24"></a>Die Arbeitsdatenbank:</h1>
+<p><a href="https://neo4j-iss.adwmainz.net/">https://neo4j-iss.adwmainz.net/</a><br>
+Login: <em>Ihre Logindaten vom RaspberryPi</em></p>
+<h1><a id="Die_Befehle_in_cypher_29"></a>Die Befehle in cypher</h1>
+<ol>
+<li>CREATE (); (<em>Erstellt einen Knoten</em>)</li>
+<li>CREATE () RETURN *; (<em>Erstellt einen Knoten und liefert die Aktion zurück</em>)</li>
+<li>CREATE (n) RETURN *; (<em>Man muss bei Erstellung einen Namen angeben, damit
+anschließend etwas zurückgeliefert werden kann</em>)</li>
+<li>CREATE (n:Person) RETURN *; (<em>Erstellt einen Knoten mit einem
+Label und liefert das erstellte als Ergebnis zurück</em>)</li>
+<li>CREATE (n:Person {name:‘Andreas’}) RETURN *; (<em>Erstellt einen
+Knoten mit Label und einer Eigenschaft</em>)</li>
+<li>MERGE (n:Person {name:‘Andreas’}) RETURN *; (<em>Erstellt einen
+Knoten mit Label und einer Eigenschaft, falls es ihn noch nicht gibt</em>)</li>
+<li>MATCH (n:Person {name:‘Andreas’})
+SET n.Geburtsort = ‘Giessen’
+RETURN *;
+(<em>Ergänzt einen Personenknoten um die Eigenschaft Geburtsort</em>)</li>
+</ol>
+<h1><a id="Verknpfungen_und_Auswertung_46"></a>Verknüpfungen und Auswertung</h1>
+<p>MATCH (n1:Person {name:‘Andreas’})<br>
+MATCH (n2:Person {name:‘Melanie’})<br>
+MERGE (n1)-[:KENNT]-&gt;(n2)<br>
+RETURN *;
+<em>(Ergänzt eine Verküpfung zum rechten Nachbarn)</em></p>
+<p>MATCH (n:Person)<br>
+RETURN n.Geburtsort, count(*) as count, collect(n.Nachname) as Nachname<br>
+ORDER BY count DESC;<br>
+<em>(Ranking der Geburtsorte)</em></p>
+<h1><a id="Import_Personen_von_Google_59"></a>Import Personen von Google</h1>
+<p>Link zum Google-Spreadsheet:<br>
+<a href="https://drive.google.com/open?id=1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw">https://drive.google.com/open?id=1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw</a></p>
+<p>LOAD CSV WITH HEADERS FROM &quot;<a href="https://docs.google.com/spreadsheets/d/1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw/export?format=csv&amp;id=1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw&amp;gid=0">https://docs.google.com/spreadsheets/d/1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw/export?format=csv&amp;id=1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw&amp;gid=0</a>&quot;<br>
+AS line FIELDTERMINATOR ‘,’<br>
+CREATE (p:Person {pid:line.Nummer, Nachname:line.Nachname, Vorname:line.Vorname, Geburtsort:line.Geburtsort})<br>
+RETURN *;</p>
+<h3><a id="ORDER_BY_Geburtsort_68"></a>ORDER BY Geburtsort</h3>
+<p>MATCH (n:Person)<br>
+RETURN n.Geburtsort, count(*) as count, collect(n.Nachname) as Nachname<br>
+ORDER BY count DESC;</p>
+<h3><a id="Wer_kennt_wen_ergnzen_73"></a>Wer kennt wen ergänzen</h3>
+<p>LOAD CSV WITH HEADERS FROM &quot;<a href="https://docs.google.com/spreadsheets/d/1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw/export?format=csv&amp;id=1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw&amp;gid=0">https://docs.google.com/spreadsheets/d/1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw/export?format=csv&amp;id=1q1n2TqH4blCm0LU3GFisCFLU91f9hm7TROk4eh0auyw&amp;gid=0</a>&quot;<br>
+AS line FIELDTERMINATOR ‘,’<br>
+MATCH (p1:Person {pid:line.Nummer}), (p2:Person {pid:line.kennt})<br>
+CREATE (p1)-[:KENNT]-&gt;(p2)<br>
+RETURN *;</p>
+
+</body></html>

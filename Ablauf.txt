@@ -1,0 +1,15 @@
+Graphentechnologien
+1. 
+
+Regesta Imperii
+1. Ein Regest der Regesta Imperii
+2. Das dazu passende Graphenmodell
+3. Das Register im Graphen
+4. Möglichkeiten der inhaltlichen Erschließung
+
+DTA
+1. Import von DTA-TCF-Daten in die Graphdatenbank
+2. Import von DTA-TEI-P5-Daten in die Graphdatenbank
+3. Graph-Refactoring der TEI-P5-Daten
+4. Modell für Textdaten im Graphen
+

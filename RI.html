@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Regesta Imperii</title>
+
+    <!-- meta information -->
+    <meta name="author" content="AUTHOR" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <!-- favicons -->
+    <link rel="shortcut icon" href="resources/img/favicon.png" />
+    <link rel="apple-touch-icon" href="resources/img/apple-touch-icon.png" />
+
+    <!-- CSS reset and grid -->
+    <link href="vendor/normalize/normalize-4.1.1.css" rel="stylesheet" />
+    <link href="vendor/skeleton/skeleton-2.0.4.css" rel="stylesheet" />
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,600italic,400italic,700italic,800,800italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+
+    <!-- presentation styles -->
+    <link href="resources/css/style.css" rel="stylesheet" />
+
+    <!-- other libraries -->
+
+    <!-- chartist.js -->
+    <link rel="stylesheet" href="vendor/chartist/chartist.min-0.9.7.css" />
+
+    <!-- codemirror -->
+    <link rel="stylesheet" href="vendor/codemirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="resources/css/codemirror-sparql.css" />
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css" />
+
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="vendor/magnific-popup/magnific-popup-1.1.0.css" />
+
+    <!-- js libs that need to be in head -->
+
+    <!-- greuler -->
+    <script src="vendor/d3/d3-3.5.6.js"></script>
+    <script src="vendor/cola/cola.v3.min.js"></script>
+    <script src="vendor/greuler/greuler-0.5.5.min.js"></script>
+
+    <!-- html5 dataset shim for IE -->
+    <script src="vendor/impress/html5-dataset.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <div class="fallback-message">
+        <p>
+            Your browser <strong>doesn't support the features required</strong> by impress.mod.js,
+            so you are presented with a simplified version of this presentation.
+        </p>
+        <p>
+            For the best experience please use the latest <strong>Chrome</strong>, <strong>Safari</strong>
+            or <strong>Firefox</strong> browser.
+        </p>
+    </div>
+
+    <div id="impress">
+
+        <div class="step">
+            <h4>Akademie der Wissenschaften und der Literatur | Digitale Akademie</h4>
+
+            <h2>Graphbasierte Registererschließung am Beispiel der Regesta Imperii</h2>
+
+            <h5 class="byline">
+                <strong>Andreas Kuczera |
+                    <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/">https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/</a>
+                    <br/>
+                    Beispielprojekte: <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/NomenEtGens.html">NeG</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/RI.html">RI</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/DTA.html">DTA</a>
+                </strong>
+                <br/><a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>
+            </h5>
+        </div>
+
+        <div class="step">
+            <h2>Gliederung</h2>
+            <ol class=subset>
+                <li>
+                    Das Projekt Regesta Imperii
+                </li>
+                <li>
+                    Das Regest im Graphen
+                </li>
+               <li>
+                    Personenbeziehungen durch Registerauswertung
+                </li>
+                <li>
+                    Statistische Betrachtungen
+                </li>
+            </ol>
+        </div>
+
+
+        <div class="step">
+            <h1 class="red">01</h1>
+            <h2>Das Projekt Regesta Imperii</h2>
+
+                <ul class="medium">
+                	<li class="substep">
+                	    Die <a href="http://www.regesta-imperii.de">Regesta Imperii</a> sind ein Projekt aus dem Bereich der mediävistischen Grundlagenforschung.
+                	</li>
+
+                	<li class="substep">Im Rahmen des Projekts werden deutschsprachige Inhaltsangaben von Kaiser-, König- und Papsturkunden erstellt, die die handelnden Personen, die Orte und die rechtlich relevanten Inhalte zusammenfassen.
+			</li>
+			<li class="substep">Im Jahre 1829 von seinem Initiator Johann Friedrich Böhmer ursprünglich als Vorarbeit für die <a href="http://www.mgh.de">Monumenta Germaniae Historica</a> angelegt, entwickelte sich das Projekt mit einem erweiterten Regestenkonzept zu einem eigenständigen historischen Grundlagenwerk fort. </li>
+                	<li class="substep">Im Rahmen eines DFG-Projekts wurden die Regesta Imperii von 2001 bis 2006 retrodigitalisiert und stehen seither als Volltext im Internet zur Verfügung.</li>
+                	<li class="substep">Momentan werden die teilweise schon digital vorliegenden Register aufgearbeitet und für die Publikation im Internet vorbereitet.
+            	    </li>
+                	<li class="substep">In dieser Präsentation werden Erschließungsperspektiven anhand der Register der Regesten Kaiser Heinrichs IV. vorgestellt.
+            	    </li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h1 class="red">02</h1>
+            <h2><a href="bilder/RI-Regest im Graphen.png">Das Regest im Graphen</a></h2>
+            	<ul class="medium">
+                	<li class="substep">
+            		    Für die Erstellung der <a href="http://jlu-buster.mni.thm.de:10200/browser/">Graphdatenbank</a> werden die Regesten aus unserem Datenrepositorium als CSV-Daten exportiert und anschließend in die Graphdatenbank importiert. Dieser Import ist nicht fehlerfrei und stellt einen Proof-of-Concept dar (<a href="bilder/RI-Regest-im-Graphen.png">Beispiel 1</a>, <a href="bilder/Regesten-Graph-Beispiel.png">Beispiel 2</a>).
+            		</li>
+                	<li class="substep">
+            		    Aus den Regesteninformationen werden dabei Knoten und Kanten erstellt. Der Regestentext und die Überlieferung werden als Eigenschaften (oder properties) der Knoten abgespeichert und bleiben damit für die Volltextrecherche über cypher verfügbar.
+            		</li>
+                	<li class="substep">
+            		    Beim Importprozess wird das erste Verb des Regests identifiziert und lemmatisiert und anschließend mit den jeweiligen Regesten verbunden. Damit wird die Beobachtung des Herrscherhandelns in Raum und Zeit möglich.
+            		</li>
+                   	<li class="substep">
+            		    Im Überlieferungsteil sind die Literaturhinweise meist mit der Literaturdatenbank der Regesta Imperii, dem <a href="http://www.regesta-imperii.de/opac.html">RI-Opac</a> verlinkt. Da diese Links eindeutig sind, können sie mit cypher-queries identifiziert und als eigener Knotentyp in der Graphdatenbank angelegt und für die Erstellung von Zitationsnetzwerken verwendet werden.
+            		</li>
+                   	<li class="substep">
+            		    Das Register wird in einem eigenen Prozess importiert und mit den Regesten verknüpft. Beim Import bleibt die Hierarchie des Registers erhalten.
+            		</li>
+            	</ul>
+        </div>
+        <div class="step">
+            <h1 class="red">03a</h1>
+            <h2>Personenbeziehungen durch Registerauswertung</h2>
+            	<ul class="medium">
+                	<li class="substep">Die Registeraufbereitung ist Teil eines kleinen Forschungsprojekts mit Prof. Lubich (Bochum) in dessen Rahmen Auswertungsperspektiven für  Register in <a href="http://jlu-buster.mni.thm.de:10200/browser/">Graphdatenbanken</a> erörtert werden.
+            		</li>
+                	<li class="substep">Ausgangspunkt ist Graf Robert von Flandern, den man mit folgendem cypher-query findet: <pre>
+<code class="linenumbers js">// Robert II. von Flandern
+MATCH (n:IndexPerson) WHERE n.registerId = 'H4P01822'
+RETURN *;
+</code></pre></li>
+                	<li class="substep">Welche weiteren Personen sind in den Regesten gemeinsam mit Robert genannt ? <pre>
+<code class="linenumbers js">// Robert II. von Flandern mit Netzwerk
+MATCH (n:IndexPerson)-[:PERSON_IN]->(r:Regesta)<-[:PERSON_IN]-
+(m:IndexPerson)
+WHERE n.registerId = 'H4P01822'
+RETURN *;
+</code></pre></li>
+            	</ul>
+        </div>
+        <div class="step">
+            <h1 class="red">03b</h1>
+            <h2>Personenbeziehungen durch Registerauswertung</h2>
+            	<ul class="medium">
+                	<li class="substep">Eine weitere Ebene dazu:<pre>
+<code class="linenumbers js">// Robert II. von Flandern mit Netzwerk und Herrscherhandeln (viel)
+MATCH
+(n1:IndexPerson)-[:PERSON_IN]->(r1:Regesta)<-[:PERSON_IN]-
+(n2:IndexPerson)-[:PERSON_IN]->(r2:Regesta)<-[:PERSON_IN]-
+(n3:IndexPerson)
+WHERE n1.registerId = 'H4P01822'
+RETURN *;
+</code></pre></li>
+<li class="substep">Welche Beziehungen bestehen zwischen Robert II. von Flandern und Herzog Heinrich von Niederlothringen in der <a href="http://jlu-buster.mni.thm.de:10200/browser/">Graphdatenbank</a> ?
+                        <pre><code class="linenumbers js">// Robert II. von Flandern und Herzog Heinrich von Niederlothringen mit Netzwerk
+MATCH
+(n:IndexPerson)-[:PERSON_IN]->
+(r:Regesta)<-[:PERSON_IN]-(m:IndexPerson)
+WHERE n.registerId = 'H4P01822'
+AND m.registerId = 'H4P00926'
+RETURN *;
+</code></pre></li>
+            	</ul>
+        </div>
+        <div class="step">
+            <h1 class="red">03c</h1>
+            <h2>Personenbeziehungen durch Registerauswertung</h2>
+            	<ul class="medium">
+                 	<li class="substep">Gibt es Personen, mit denen beide in Regesten gemeinsam genannt sind ...
+                        <pre><code class="linenumbers js">MATCH
+(startPerson:IndexPerson)-[:PERSON_IN]->
+(regest:Regesta)<-[:PERSON_IN]-(endPerson:IndexPerson)
+WHERE startPerson.registerId in ['H4P01822', 'H4P00926']
+RETURN *;
+</code></pre></li>
+                 	<li class="substep">Verlagerung der Regesten in APPEARS_WITH-Kanten ...
+                        <pre><code class="linenumbers js">MATCH
+(startPerson:IndexPerson)-[:PERSON_IN]->
+(regest:Regesta)<-[:PERSON_IN]-(endPerson:IndexPerson)
+WHERE startPerson.registerId in ['H4P01822', 'H4P00926']
+WITH startPerson, endPerson, count(regest) as anzahl,
+collect(regest.ident) as idents
+CALL apoc.create.vRelationship(startPerson, "APPEARS_WITH",
+{anzahl:anzahl, regesten:idents}, endPerson) YIELD rel
+RETURN startPerson, endPerson, rel;
+
+</code></pre></li>
+            	</ul>
+        </div>
+        <div class="step">
+            <h1 class="red">03d</h1>
+            <h2>Personenbeziehungen durch Registerauswertung</h2>
+            	<ul class="medium">
+                  <li class="substep">Und nun nur die interessanten Regesten als Ergbenis:
+      <pre><code class="linenumbers js">MATCH
+(startPerson:IndexPerson)-[:PERSON_IN]->
+(regest1:Regesta)<-[:PERSON_IN]-(middlePerson:IndexPerson)
+-[:PERSON_IN]->(regest2:Regesta)<-[:PERSON_IN]-(endPerson:IndexPerson)
+WHERE startPerson.registerId in ['H4P00926']
+AND endPerson.registerId in ['H4P01822']
+RETURN DISTINCT startPerson.name1, regest1.ident, regest1.text,
+middlePerson.name1, regest2.ident, regest2.text, endPerson.name1;
+</code></pre></li>
+            	</ul>
+        </div>
+        <div class="step">
+            <h1 class="red">04</h1>
+            <h2>Statistische Betrachtungen</h2>
+            	<ul class="medium">
+                 	<li class="substep">Herrscherhandeln ausgezählt
+                        <pre><code class="linenumbers js">MATCH (n:Lemma)<-[h:ACTION]-(m:Regesta)
+RETURN n.lemma, count(h) as ANZAHL ORDER BY ANZAHL desc LIMIT 25;
+</code></pre></li>
+                 	<li class="substep">Herrscherhandeln pro Ausstellungsort ausgezählt
+                        <pre><code class="linenumbers js">// Herrscherhandeln pro Ausstellungsort
+MATCH (n:Lemma)<-[h:ACTION]-(:Regesta)-[:PLACE_OF_ISSUE]->(p:Place)
+WHERE p.normalizedGerman IS NOT NULL
+RETURN p.normalizedGerman, n.lemma, count(h) as ANZAHL ORDER BY ANZAHL desc LIMIT 25;
+</code></pre></li>
+                 	<li class="substep">Welcher Literaturtitel wird am meisten zitiert ?
+                        <pre><code class="linenumbers js">MATCH (n:Reference)<-[r:REFERENCES]-(m:Regesta)
+RETURN n.title, count(r) as ANZAHL ORDER BY ANZAHL desc LIMIT 25;
+</code></pre></li>
+            	</ul>
+        </div>
+        <div class="step">
+            <h1 class="red">05</h1>
+            <h2>Herrscherhandeln und Anwesenheit</h2>
+            	<ul class="medium">
+                 	<li class="substep">Welche Personen sind bei welchen Herrscherhandlungen wie häufig
+                        <pre><code class="linenumbers js">MATCH (p:IndexPerson)-[:PERSON_IN]-(r:Regesta)-[:ACTION]-(l:Lemma)
+RETURN p.name1, l.lemma, count(l) AS Anzahl ORDER BY p.name1, Anzahl DESC;
+</code></pre></li>
+                 	<li class="substep">Regesten 200 km rund um Augsburg
+                        <pre><code class="linenumbers js">// Entfernungen von Orten berechnen lassen
+MATCH (n:Place)
+WHERE n.normalizedGerman = 'Augsburg'
+WITH n.latLong as point
+MATCH (r:Regesta)
+WHERE distance(r.latLong, point) < 200000
+AND r.placeOfIssue IS NOT NULL
+AND r.placeOfIssue <> 'Augsburg'
+RETURN r.ident, r.placeOfIssue,
+distance(r.latLong, point) AS Entfernung
+ORDER BY Entfernung;
+</code></pre></li>
+            	</ul>
+        </div>
+
+
+        <div class="step">
+            <h4>Akademie der Wissenschaften und der Literatur | Digitale Akademie</h4>
+
+            <h2 class="red">Vielen Dank für Ihre Aufmerksamkeit</h2>
+
+            Den Link zur Präsentation finden Sie auf der Seite <a href="http://www.graphentechnologien.de">www.graphentechnologien.de</a><br/>
+
+			<a href="https://digitale-methodik.adwmainz.net/mod5/5c/pages/topics/graphentechnologien#literatur">Literaturauswahl</a>
+
+            <h5 class="byline">
+                <strong>Andreas Kuczera |
+                    <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/">https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/</a>
+                    <br/>
+                    Beispielprojekte: <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/NomenEtGens.html">NeG</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/RI.html">RI</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/DTA.html">DTA</a>
+                </strong>
+                <br/><a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>
+            </h5>
+        </div>
+
+	</div>
+    <!-- js libs -->
+
+    <!-- chartist -->
+    <script src="vendor/chartist/chartist.min-0.9.7.js"></script>
+
+    <!-- codemirror -->
+    <script src="vendor/codemirror/lib/codemirror.js"></script>
+    <script src="vendor/codemirror/mode/sparql/sparql.js"></script>
+
+    <!-- highlight -->
+    <script src="vendor/highlight/highlight.pack-9.3.0.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- jquery -->
+    <script src="vendor/jquery/jquery-1.11.0.min.js"></script>
+
+    <!-- magnific popup -->
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min-1.1.0.js"></script>
+    <script src="resources/js/magnific-popup.lightbox.js"></script>
+
+    <!-- sgvizler -->
+    <script src="vendor/sgvizler/sgvizler.fork.js"></script>
+
+    <!-- impress.mod.js -->
+    <script src="vendor/impress/impress.fork.js"></script>
+    <script src="vendor/impress/impress-slidenum.js"></script>
+    <script>
+        var obj = impress();
+        obj.init();
+        initSlideNo(obj);
+    </script>
+
+</body>
+</html>

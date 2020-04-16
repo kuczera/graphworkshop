@@ -1,0 +1,19 @@
+Vorlagen:
+
+// Bild mit Bildunterschrift
+
+
+// Liste mit Punkten
+    <div class="step">
+        <div class="row">
+            <div class="twelve columns">
+                        <figure class="mfp-lightbox"><a href="bilder/020-Verwandschaften.jpg"><img
+                                src="bilder/020-Verwandschaften.jpg"
+                                alt="16 verschiedene Verwandtschaftsbeziehungen"></a>
+                            <figcaption class="small">Bis zu 16 verschiedene Verwandtschaftsbeziehungen, wie z. B. Bruder, Schwester, Sohn, Tochter, Vater, Mutter, Onkel oder Nichte.</figcaption>
+                        </figure>
+            </div>
+        </div>
+    </div>
+
+

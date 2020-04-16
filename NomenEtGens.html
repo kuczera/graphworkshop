@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nomen et Gens</title>
+
+    <!-- meta information -->
+    <meta name="author" content="AUTHOR" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <!-- favicons -->
+    <link rel="shortcut icon" href="resources/img/favicon.png" />
+    <link rel="apple-touch-icon" href="resources/img/apple-touch-icon.png" />
+
+    <!-- CSS reset and grid -->
+    <link href="vendor/normalize/normalize-4.1.1.css" rel="stylesheet" />
+    <link href="vendor/skeleton/skeleton-2.0.4.css" rel="stylesheet" />
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,600italic,400italic,700italic,800,800italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+
+    <!-- presentation styles -->
+    <link href="resources/css/style.css" rel="stylesheet" />
+
+    <!-- other libraries -->
+
+    <!-- chartist.js -->
+    <link rel="stylesheet" href="vendor/chartist/chartist.min-0.9.7.css" />
+
+    <!-- codemirror -->
+    <link rel="stylesheet" href="vendor/codemirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="resources/css/codemirror-sparql.css" />
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="vendor/highlight/styles/default.css" />
+
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="vendor/magnific-popup/magnific-popup-1.1.0.css" />
+
+    <!-- js libs that need to be in head -->
+
+    <!-- greuler -->
+    <script src="vendor/d3/d3-3.5.6.js"></script>
+    <script src="vendor/cola/cola.v3.min.js"></script>
+    <script src="vendor/greuler/greuler-0.5.5.min.js"></script>
+
+    <!-- html5 dataset shim for IE -->
+    <script src="vendor/impress/html5-dataset.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <div class="fallback-message">
+        <p>
+            Your browser <strong>doesn't support the features required</strong> by impress.mod.js,
+            so you are presented with a simplified version of this presentation.
+        </p>
+        <p>
+            For the best experience please use the latest <strong>Chrome</strong>, <strong>Safari</strong>
+            or <strong>Firefox</strong> browser.
+        </p>
+    </div>
+
+    <div id="impress">
+
+        <div class="step">
+            <h4>Akademie der Wissenschaften und der Literatur | Digitale Akademie</h4>
+
+            <h2>Verwandtschaft im Graphen am Beispiel von Nomen et Gens</h2>
+
+            <h2 class="red"></h2>
+
+            <h5 class="byline">
+                <strong>Andreas Kuczera |
+                    <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/">https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/</a>
+                </strong>
+                    <br/>Verwendung der Nomen-et-Gens-Daten mit freundlicher Genehmigung von Prof. Patzold (Tübingen, 22.01.2019)
+                    <br/>
+                <strong>
+                    Beispielprojekte: <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/NomenEtGens.html">NeG</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/RI.html">RI</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/DTA.html">DTA</a>
+                </strong>
+                <br/><a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>
+            </h5>
+        </div>
+
+        <div class="step">
+            <h2>Gliederung</h2>
+            <ol class=subset>
+                <li>
+                    Das Projekt Nomen et Gens
+                </li>
+                <li>
+                    Vielfälte Verwandtschaftsbeziehungen -- Modellierungsfragen
+                </li>
+                <li>
+                    Die Urenkel Pippins II.
+                </li>
+                <li>
+                    Die Neffen von Karl Martell
+                </li>
+                <li>
+                    Sind Berchar und Karl der Große verwandt ?
+                </li>
+            </ol>
+        </div>
+
+
+        <div class="step">
+            <h1 class="red">01</h1>
+            <h2>Das Projekt Nomen et Gens</h2>
+
+                <ul class="medium">
+                	<li class="substep">
+                	    Das Projekt „<a href="http://www.neg.uni-tuebingen.de/?q=de/ziele">Nomen et Gens</a>“ (NeG) zielt darauf ab, alle schriftlich belegten Namen und Personen Kontinentaleuropas in den vier Jahrhunderten vor Karl dem Großen (also von 400 bis 800 nach Christus) zu erfassen.
+                	</li>
+
+                	<li class="substep">
+                	    Die <a href="https://escience-center.uni-tuebingen.de/neg/gast/startseite.jsp">Datenbank</a> des Projekts geht auf ein erfolgreich abgeschlossenes DFG-Projekt zurück und wird aktuell von den Projektbeteiligten weiter betreut und sukzessive ausgebaut.
+                	</li>
+
+                	<li class="substep">
+                	    Neben den Quellen der Personennennung, den unterschiedlichen Namensformen usw. werden auch die Verwandtschaftsbeziehungen zwischen identifizierten Personen in der Datenbank abgelegt.
+                	</li>
+
+                	<li class="substep">
+                	    Bei einem Personendatensatz werden dann jeweils die Verwandtschaftsbeziehungen aufgelistet, so dass man sich ggf. jeweils von Person zu Person durchklicken muss, bis man am Ziel angelangt ist (<i>Beispiel Karl der Große mit der ID 7404</i>).
+            	    </li>
+            </ul>
+        </div>
+
+       <div class="step">
+            <h1 class="red">02</h1>
+            <h2>Modellierung von Verwandtschaft</h2>
+
+                <ul class="medium">
+                	<li class="substep">
+                	    In der Datenbank werden bis zu 16 verschiedene Verwandtschaftsbeziehungen gespeichert, wie z. B. Bruder, Schwester, Sohn, Tochter, Vater, Mutter, Onkel oder Nichte (<a href="bilder/020-Verwandschaften.jpg">Beispiel</a>).
+                	</li>
+
+                	<li class="substep">
+                	    Welche Typen von Kanten werden für die Modellierung von Verwandtschaftsbeziehungen mindestens benötigt ?
+			</li>
+                	<li class="substep">
+			Die Testdatenbank findet man unter diesem <a href="http://jlu-buster.mni.thm.de:10075/browser/">Link</a>. Sie stellt einen Proof of Concept dar und erhebt keinen Anspruch auf Vollständigkeit.
+			</li>
+            </ul>
+        </div>
+
+
+        <div class="step">
+	    <h1 class="red">03</h1>
+            <h2>Die Urenkel Pippins II.</h2>
+            <h3 class="red up-25 after-50">mit ihren Pfaden</h3>
+            	<ul class="medium">
+                	<li class="substep">
+                	    Mit folgendem Cypher-Query findet man Pippin II.:
+                	        <pre>
+<code class="linenumbers js">// Pippin II.
+MATCH (P:Person {nid:'7212'})
+RETURN *;</code></pre></li>
+                 	<li class="substep">
+                	    Mit folgendem Cypher-Query findet man die Kinder Pippins II.:
+                	        <pre>
+<code class="linenumbers js">// Die Kinder Pippins II.
+MATCH (P:Person {nid:'7212'})-[:KIND]->(K)
+RETURN *;</code></pre></li>
+                	<li class="substep">
+                	    Mit folgendem Cypher-Query finden sich schließlich die Urenkel Pippins II.:
+                	        <pre>
+<code class="linenumbers js">// Die Urenkel Pippins II.
+MATCH (P:Person {nid:'7212'})-[:KIND]->(K)-[:KIND]->(E)-[:KIND]->(UE)
+RETURN *;</code></pre></li>
+            	</ul>
+        </div>
+
+        <div class="step">
+	    <h1 class="red">04</h1>
+            <h2>Die Neffen von Karl Martell</h2>
+            	<ul class="medium">
+                	<li class="substep">
+                	    Die Neffen von Karl Martell sind die Enkel <a href="https://de.wikipedia.org/wiki/Pippin_der_Mittlere">Pippins II.</a> ohne die Kinder von Karl Martell. Mit folgendem Cypher-Query findet man Karl Martell:
+                	        <pre>
+<code class="linenumbers js">// Karl Martell
+MATCH (P:Person {nid:'23022'})
+RETURN *;</code></pre></li>
+                 	<li class="substep">
+                	    Mit folgendem Cypher-Query findet man die Neffen von Karl Martell:
+                	        <pre>
+<code class="linenumbers js">// Die Neffen von Karl Martell
+MATCH (P:Person {nid:'23022'})<-[:KIND]-(E)
+-[:KIND]->(B)-[:KIND]->(N {Geschlecht:'m'})
+RETURN *;</code></pre></li>
+                 	<li class="substep">
+                	    Mit folgendem Cypher-Query findet man NUR die <a href="bilder/Die Neffen von Karl Martell.png">Stiefneffen</a> von Karl Martell:
+                	        <pre>
+<code class="linenumbers js">// Die Neffen von Karl Martell
+MATCH (P:Person {nid:'23022'})<-[:KIND]-(E)-[:KIND]->(B)-[:KIND]->(N)
+WHERE B.nid <> P.nid
+RETURN *;</code></pre></li>
+                	<li class="substep">
+			Mit dem Zusatz "<i>WHERE B.nid <> P.nid</i>" wird der Pfad zurück über Karl Martell zu seinen Kindern ausgeschlossen.
+                	</li>
+            	</ul>
+        </div>
+
+
+        <div class="step">
+            <h1 class="red">05</h1>
+            <h2>Sind Berchar und Karl der Große verwandt ?</h2>
+            	<ul class="medium">
+                	<li class="substep">
+            		    In der <a href="http://jlu-buster.mni.thm.de:10075/browser/">Datenbank</a> gibt es die Person Berchar. Berchar war ein Hausmeier König Theuderichs III. 
+            		</li>
+                	<li class="substep">
+                	    Mit folgendem Cypher-Query findet man Berchar:
+                	        <pre>
+<code class="linenumbers js">// Berchar
+MATCH (B:Person {nid:'7119'})
+RETURN *;</code></pre></li>
+                	<li class="substep">
+            		    In der Graphdatenbank neo4j wird für eine solche Fragestellung eine Shortest_Path-Abfrage verwendet, die den kürzesten möglichen Weg zwischen zwei Knoten zurück liefert, sofern es einen gibt.
+            		</li>
+                	<li class="substep">
+                	    Der folgende cypher-Befehl liefert den Pfad zwischen dem Personenknoten Karls des Großen mit der NeG-ID 7404 und dem Personenknoten von Berchar mit der NeG-ID 7119. Dabei wird die Länge des abzufragenden Pfades auf 15 Kanten begrenzt.
+                        <pre><code class="linenumbers js">// shortest_path
+MATCH
+(KdG:Person { nid:'7404' }),
+(Berchar:Person { nid:'7119' }),
+p = shortestPath((KdG)-[*..15]-(Berchar))
+RETURN p;</code></pre></li>
+            	</ul>
+        </div>
+
+    <div class="step">
+        <div class="row">
+            <div class="twelve columns">
+                        <figure class="mfp-lightbox"><a href="bilder/050-Berchar-Karl-shortestpath.jpg"><img
+                                src="bilder/050-Berchar-Karl-shortestpath.jpg"
+                                alt="Datenbankeintrag von Berchar in der Datenbank von Nomen et Gens"></a>
+                            <figcaption class="small">ShortestPath zwischen Berchar und Karl dem Großen</figcaption>
+                        </figure>
+            </div>
+        </div>
+    </div>
+
+        <div class="step">
+            <h4>Akademie der Wissenschaften und der Literatur | Digitale Akademie</h4>
+
+            <h2 class="red">Vielen Dank für Ihre Aufmerksamkeit</h2>
+
+            Den Link zur Präsentation finden Sie auf der Seite <a href="http://www.graphentechnologien.de">www.graphentechnologien.de</a><br/>
+
+			<a href="https://digitale-methodik.adwmainz.net/mod5/5c/pages/topics/graphentechnologien#literatur">Literaturauswahl</a>
+
+            <h5 class="byline">
+                <strong>Andreas Kuczera |
+                    <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/">https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/</a>
+                </strong>
+                    <br/>Verwendung der Nomen-et-Gens-Daten mit freundlicher Genehmigung von Prof. Patzold (Tübingen, 22.01.2019)
+                <strong>
+                    <br/>
+                    Beispielprojekte: <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/NomenEtGens.html">NeG</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/RI.html">RI</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/DTA.html">DTA</a>
+                </strong>
+                <br/><a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>
+            </h5>
+        </div>
+
+    <!-- js libs -->
+
+    <!-- chartist -->
+    <script src="vendor/chartist/chartist.min-0.9.7.js"></script>
+
+    <!-- codemirror -->
+    <script src="vendor/codemirror/lib/codemirror.js"></script>
+    <script src="vendor/codemirror/mode/sparql/sparql.js"></script>
+
+    <!-- highlight -->
+    <script src="vendor/highlight/highlight.pack-9.3.0.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- jquery -->
+    <script src="vendor/jquery/jquery-1.11.0.min.js"></script>
+
+    <!-- magnific popup -->
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min-1.1.0.js"></script>
+    <script src="resources/js/magnific-popup.lightbox.js"></script>
+
+    <!-- sgvizler -->
+    <script src="vendor/sgvizler/sgvizler.fork.js"></script>
+
+    <!-- impress.mod.js -->
+    <script src="vendor/impress/impress.fork.js"></script>
+    <script src="vendor/impress/impress-slidenum.js"></script>
+    <script>
+        var obj = impress();
+        obj.init();
+        initSlideNo(obj);
+    </script>
+
+</body>
+</html>
