@@ -73,7 +73,7 @@
 
             <h5 class="byline">
                 <strong>Andreas Kuczera |
-                    <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/">https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/</a>
+                    <a href="https://kuczera.github.io/graphworkshop">https://kuczera.github.io/graphworkshop</a>
                     <br/>
                     Beispielprojekte: <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/NomenEtGens.html">NeG</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/RI.html">RI</a> | <a href="https://digitale-methodik.adwmainz.net/mod5/5c/slides/graphentechnologien/DTA.html">DTA</a>
                 </strong>
@@ -162,7 +162,7 @@
             			Oder eine <a href="https://neo4j.com/sandbox-v2/">Sandbox</a> erstellen<br/>
             			</li>
                 	<li class="substep">
-            			Neo4j-Desktop starten bzw. Browser aufrufen<br/>
+            			Neo4j-Desktop starten bzw. <a href="http://jlu-buster.mni.thm.de:11000/browser/">Browser</a> aufrufen<br/>
             			(<a href="http://localhost:7474">http://localhost:7474</a>)
             		</li>
                 	<li class="substep">
@@ -192,6 +192,8 @@
             	</li>
 <li class="substep">Datenbank leeren:
 <pre><code class="linenumbers js">MATCH (n) DETACH DELETE n;
+CALL apoc.schema.assert({},{},true) YIELD label, key
+RETURN *;
 </code></pre></li>
             </ul>
         </div>
