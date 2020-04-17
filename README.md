@@ -8,6 +8,8 @@
 
 Description
 
+https://kuczera.github.io/graphworkshop/#/step-1 
+
 The code of this boilerplate is at https://github.com/digicademy/impress-js-boilerplate
 
 A live demo can be found at http://digicademy.github.io/impress-js-boilerplate/
