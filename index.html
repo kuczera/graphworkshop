@@ -278,12 +278,12 @@ RETURN n;
             	<li class="substep">Ergänzt eine Verküpfung zwischen zwei Personen
 <pre><code class="linenumbers js">MATCH (n1:Person {nachname:'Kuczera'})
 MATCH (n2:Person {nachname:'Schrade'})
-MERGE (n1)-[:MEIN_LINKER_NACHBAR]->(n2)
+MERGE (n1)-[:KENNT]->(n2)
 RETURN *;
 </code></pre></li>
 
-				<li class="substep">Zeige mir alle Personen neben Herrn Kuczera:
-<pre><code class="linenumbers js">MATCH (n:Person {nachname:'Kuczera'})-[:MEIN_LINKER_NACHBAR]-(m:Person)
+				<li class="substep">Zeige mir alle Personen, die Herr Kuczera kennt:
+<pre><code class="linenumbers js">MATCH (n:Person {nachname:'Kuczera'})-[:KENNT]-(m:Person)
 RETURN *;
 </code></pre></li>
 			</ul>
