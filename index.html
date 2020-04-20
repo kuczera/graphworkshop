@@ -326,7 +326,8 @@ RETURN *;</code></pre></li>
             <ul class="medium">
                 	<li class="substep"><pre><code class="linenumbers js">MATCH (n:Person) WHERE n.projekt IS NOT NULL
 MERGE (p:Projekt {name:n.projekt})
-MERGE (n)-[:PROJEKT]->(p);
+MERGE (n)-[:PROJEKT]->(p)
+RETURN *;
 </code></pre></li>
 
 
@@ -335,7 +336,8 @@ MERGE (f1:Fach {name:n.studienfach1})
 MERGE (n)-[:STUDIUM]->(f1);
 MATCH (n:Person) WHERE n.studienfach2 IS NOT NULL
 MERGE (f2:Fach {name:n.studienfach2})
-MERGE (n)-[:STUDIUM]->(f2);
+MERGE (n)-[:STUDIUM]->(f2)
+RETURN *;
 </code></pre></li>
         	</ul>
         </div>
