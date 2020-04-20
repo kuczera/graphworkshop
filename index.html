@@ -401,30 +401,9 @@ RETURN p;
 
 			</ul>
     </div>
-    <div class="step">
-          <h1 class="red">10</h1>
-          <h2>Graph-Auswertung</h2>
-          <ul class="medium">
-
-            <li class="substep">Fächer explizit erstellen
-<pre><code class="linenumbers js">// Fächer aus den Properties fach1 und fach2 erstellen
-  MATCH (n:Person) WHERE n.fach1 IS NOT NULL
-  MERGE (f1:Fach {name:n.fach1})
-  MERGE (f1)<-[:STUDIUM]-(n)
-  RETURN *;
-
-  MATCH (n:Person) WHERE n.fach2 IS NOT NULL
-  MERGE (f2:Fach {name:n.fach2})
-  MERGE (f2)<-[:STUDIUM]-(n)
-  RETURN *;
-</code></pre></li>
-
-
-    </ul>
-        </div>
-
+		
         <div class="step">
-              <h1 class="red">11</h1>
+              <h1 class="red">10</h1>
               <h2>Graph-Auswertung</h2>
               <ul class="medium">
 
@@ -446,6 +425,18 @@ RETURN p;
         </ul>
             </div>
 
+    <div class="step">
+          <h1 class="red">11</h1>
+          <h2>Graph-Auswertung</h2>
+          <ul class="medium">
+
+            <li class="substep">Welche Fächer studierten die Projektmitarbeiter
+<pre><code class="linenumbers js">MATCH (n:Projekt)<-[:PROJEKT]-(p:Person)-[:STUDIUM]-(s:Fach)
+RETURN n.name AS Projekt, COLLECT(s.name) AS Fächer;</code></pre></li>
+    </ul>
+        </div>
+
+		
         <div class="step">
             <h4>Akademie der Wissenschaften und der Literatur | Digitale Akademie</h4>
 
