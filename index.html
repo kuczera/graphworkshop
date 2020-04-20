@@ -390,7 +390,7 @@ ORDER BY count DESC;
 <pre><code class="linenumbers js">// shortest_path
 MATCH
 (p1:Person { nachname:'Kuczera' }),
-(p2:Person { nachname:'Schrade' }),
+(p2:Person { nachname:'Jager' }),
 p = shortestPath((p1)-[*..25]-(p2))
 RETURN p;
 </code></pre></li>
