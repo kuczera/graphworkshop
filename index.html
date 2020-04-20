@@ -286,6 +286,12 @@ RETURN *;
 <pre><code class="linenumbers js">MATCH (n:Person {nachname:'Kuczera'})-[:KENNT]-(m:Person)
 RETURN *;
 </code></pre></li>
+		    <li class="substep">Datenbank nochmal leeren:
+<pre><code class="linenumbers js">MATCH (n) DETACH DELETE n;
+CALL apoc.schema.assert({},{},true) YIELD label, key
+RETURN *;
+</code></pre></li>
+
 			</ul>
         </div>
 
