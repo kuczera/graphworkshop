@@ -440,7 +440,7 @@ RETURN p;
 
             <li class="substep">Welche Fächer studierten die Projektmitarbeiter
 <pre><code class="linenumbers js">MATCH (n:Projekt)<-[:PROJEKT]-(p:Person)-[:STUDIUM]-(s:Fach)
-RETURN n.name AS Projekt, COLLECT(s.name) AS Fächer;</code></pre></li>
+RETURN n.name AS Projekt, COLLECT(DISTINCT s.name) AS Fächer;</code></pre></li>
     </ul>
         </div>
 
