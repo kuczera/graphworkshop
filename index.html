@@ -304,22 +304,39 @@ vorname:line.vorname, geburtsort:line.geburtsort, geburtsjahr:line.geburtsjahr, 
 RETURN *;</code></pre></li>
 
 
-                	<li class="substep"><pre><code class="linenumbers js">MATCH (n:Person)
-MATCH (n2:Person {id:n.kennt})
-MERGE (n)-[:KENNT]->(n2);
-MATCH (n:Person)
+                	<li class="substep"><pre><code class="linenumbers js">MATCH (n:Person) WHERE n.kennt IS NOT NULL
+WITH split(n.kennt, ",") AS  m, n
+UNWIND m AS j
+MATCH (n2:Person {pid:trim(j)})
+MERGE (n)-[:KENNT]->(n2)
+RETURN *;</code></pre></li>
+        	</ul>
+        </div>
+
+        <div class="step">
+            <h1 class="red">06</h1>
+            <h2>Projekte und Studienfächer erstellen</h2>
+            <ul class="medium">
+                  <li class="substep">
+                	<li class="substep"><pre><code class="linenumbers js">MATCH (n:Person) WHERE n.projekt IS NOT NULL
 MERGE (p:Projekt {name:n.projekt})
-MERGE (n)-[:PROJEKT]->(p)
-MERGE (f1:Fach {name:n.fach1})
-MERGE (n)-[:FACH]->(f1)
-MERGE (f2:Fach {name:n.fach2})
-MERGE (n)-[:FACH]->(f2);</code></pre></li>
+MERGE (n)-[:PROJEKT]->(p);
+</code></pre></li>
+
+
+                	<li class="substep"><pre><code class="linenumbers js">MATCH (n:Person) WHERE n.studienfach1 IS NOT NULL
+MERGE (f1:Fach {name:n.studienfach1})
+MERGE (n)-[:FACH]->(f1);
+MATCH (n:Person) WHERE n.studienfach2 IS NOT NULL
+MERGE (f2:Fach {name:n.studienfach2})
+MERGE (n)-[:FACH]->(f2);
+</code></pre></li>
         	</ul>
         </div>
 
 
         <div class="step">
-            <h1 class="red">06</h1>
+            <h1 class="red">07</h1>
             <h2>Abfragen und Übungen</h2>
             <ul class="medium">
 
@@ -341,7 +358,7 @@ ORDER BY count DESC;
 
 
         <div class="step">
-            <h1 class="red">06</h1>
+            <h1 class="red">08</h1>
             <h2>Abfragen und Übungen</h2>
             <ul class="medium">
 
@@ -369,7 +386,7 @@ RETURN p;
 			</ul>
     </div>
     <div class="step">
-          <h1 class="red">07</h1>
+          <h1 class="red">09</h1>
           <h2>Graph-Refactoring</h2>
           <ul class="medium">
 
@@ -400,7 +417,7 @@ RETURN p;
         </div>
 
         <div class="step">
-              <h1 class="red">08</h1>
+              <h1 class="red">10</h1>
               <h2>Graph-Auswertung</h2>
               <ul class="medium">
 
