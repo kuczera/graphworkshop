@@ -376,8 +376,8 @@ RETURN p;
 (p1:Person),
 (p2:Person),
 p = shortestPath((p1)-[*..25]-(p2))
-WHERE p1.geburtsjahr = '1992'
-AND p2.geburtsjahr = '1995'
+WHERE p1.geburtsjahr = '1972'
+AND p2.geburtsjahr = '1975'
 AND p1 <> p2
 RETURN p;
 </code></pre></li>
