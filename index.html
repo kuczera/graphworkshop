@@ -326,21 +326,37 @@ MERGE (n)-[:PROJEKT]->(p);
 
                 	<li class="substep"><pre><code class="linenumbers js">MATCH (n:Person) WHERE n.studienfach1 IS NOT NULL
 MERGE (f1:Fach {name:n.studienfach1})
-MERGE (n)-[:FACH]->(f1);
+MERGE (n)-[:STUDIUM]->(f1);
 MATCH (n:Person) WHERE n.studienfach2 IS NOT NULL
 MERGE (f2:Fach {name:n.studienfach2})
-MERGE (n)-[:FACH]->(f2);
+MERGE (n)-[:STUDIUM]->(f2);
 </code></pre></li>
         	</ul>
         </div>
 
 
+
         <div class="step">
             <h1 class="red">07</h1>
-            <h2>Abfragen und Übungen</h2>
+            <h2>Geburtsorte</h2>
             <ul class="medium">
 
-				<li class="substep">In welchem Ort sind die meisten Personen geboren ?
+      <li class="substep">Geburtsorte explizit erstellen
+<pre><code class="linenumbers js">// Geburtsorte aus der Property Geburtsort erstellen
+  MATCH (n:Person)
+  WHERE n.geburtsort IS NOT NULL
+  MERGE (o:Ort {name:n.geburtsort})
+  MERGE (o)<-[:GEBOREN_IN]-(n)
+  RETURN *;
+</code></pre></li>
+        	</ul>
+        </div>
+
+        <div class="step">
+            <h1 class="red">08</h1>
+            <h2>Geburtsorte</h2>
+            <ul class="medium">
+		    <li class="substep">In welchem Ort sind die meisten Personen geboren ?
 <pre><code class="linenumbers js">MATCH (n:Person)
 RETURN n.geburtsort, count(*) as count, collect(n.nachname) as nachname
 ORDER BY count DESC;
@@ -358,7 +374,7 @@ ORDER BY count DESC;
 
 
         <div class="step">
-            <h1 class="red">08</h1>
+            <h1 class="red">09</h1>
             <h2>Abfragen und Übungen</h2>
             <ul class="medium">
 
@@ -386,18 +402,9 @@ RETURN p;
 			</ul>
     </div>
     <div class="step">
-          <h1 class="red">09</h1>
-          <h2>Graph-Refactoring</h2>
+          <h1 class="red">10</h1>
+          <h2>Graph-Auswertung</h2>
           <ul class="medium">
-
-      <li class="substep">Geburtsorte explizit erstellen
-<pre><code class="linenumbers js">// Geburtsorte aus der Property Geburtsort erstellen
-  MATCH (n:Person)
-  WHERE n.geburtsort IS NOT NULL
-  MERGE (o:Ort {name:n.geburtsort})
-  MERGE (o)<-[:GEBOREN_IN]-(n)
-  RETURN *;
-</code></pre></li>
 
             <li class="substep">Fächer explizit erstellen
 <pre><code class="linenumbers js">// Fächer aus den Properties fach1 und fach2 erstellen
@@ -417,7 +424,7 @@ RETURN p;
         </div>
 
         <div class="step">
-              <h1 class="red">10</h1>
+              <h1 class="red">11</h1>
               <h2>Graph-Auswertung</h2>
               <ul class="medium">
 
