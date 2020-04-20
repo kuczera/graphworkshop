@@ -300,7 +300,8 @@ AS line FIELDTERMINATOR ','
 WITH line
 WHERE line.nachname IS NOT NULL
 CREATE (p1:Person {pid:line.nummer, nachname:line.nachname,
-vorname:line.vorname, geburtsort:line.geburtsort, geburtsjahr:line.geburtsjahr, kennt:line.kennt, fach1:line.fach1, fach2:line.fach2, Projekt:line.badwProjekt})
+vorname:line.vorname, geburtsort:line.geburtsort, geburtsjahr:line.geburtsjahr, 
+kennt:line.kennt, fach1:line.fach1, fach2:line.fach2, projekt:line.badwProjekt})
 RETURN *;</code></pre></li>
 
 
