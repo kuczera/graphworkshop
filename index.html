@@ -366,7 +366,7 @@ RETURN *;
             <ul class="medium">
 		    <li class="substep">In welchem Ort sind die meisten Personen geboren ?
 <pre><code class="linenumbers js">MATCH (n:Person)
-RETURN n.geburtsort, count(*) as count, collect(n.nachname) as nachname
+RETURN n.geburtsort AS Ort, count(*) as Anzahl, collect(n.nachname) as Nachnamen
 ORDER BY count DESC;
 </code></pre></li>
 
