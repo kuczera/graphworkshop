@@ -317,7 +317,6 @@ RETURN *;</code></pre></li>
             <h1 class="red">06</h1>
             <h2>Projekte und Studienfächer erstellen</h2>
             <ul class="medium">
-                  <li class="substep">
                 	<li class="substep"><pre><code class="linenumbers js">MATCH (n:Person) WHERE n.projekt IS NOT NULL
 MERGE (p:Projekt {name:n.projekt})
 MERGE (n)-[:PROJEKT]->(p);
