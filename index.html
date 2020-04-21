@@ -350,12 +350,11 @@ RETURN *;
             <ul class="medium">
 
       <li class="substep">Geburtsorte explizit erstellen
-<pre><code class="linenumbers js">// Geburtsorte aus der Property Geburtsort erstellen
-  MATCH (n:Person)
-  WHERE n.geburtsort IS NOT NULL
-  MERGE (o:Ort {name:n.geburtsort})
-  MERGE (o)<-[:GEBOREN_IN]-(n)
-  RETURN *;
+<pre><code class="linenumbers js">MATCH (n:Person)
+WHERE n.geburtsort IS NOT NULL
+MERGE (o:Ort {name:n.geburtsort})
+MERGE (o)<-[:GEBOREN_IN]-(n)
+RETURN *;
 </code></pre></li>
         	</ul>
         </div>
@@ -367,7 +366,7 @@ RETURN *;
 		    <li class="substep">In welchem Ort sind die meisten Personen geboren ?
 <pre><code class="linenumbers js">MATCH (n:Person)
 RETURN n.geburtsort AS Ort, count(*) as Anzahl, collect(n.nachname) as Nachnamen
-ORDER BY count DESC;
+ORDER BY Anzahl DESC;
 </code></pre></li>
 
             	<li class="substep">In welchem Jahr wurden die meisten Seminarteilnehmer geboren ?
